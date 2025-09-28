@@ -1,38 +1,38 @@
 package com.testing.models;
 
-import java.util.Objects;
-
 public class Contact {
-    public String firstName;
-    public String lastName;
-    public String phone;
-    public String email;
+    private String firstName;
+    private String lastName;
+    private String birthdate;
+    private String email;
+    private String phone;
+    private String city;
+    private String state;
+    private String postalCode;
+    private String country;
 
-    public Contact(String firstName, String lastName, String phone, String email) {
+    // Constructor
+    public Contact(String firstName, String lastName, String birthdate, String email,
+                   String phone, String street1, String city, String state, String postalCode, String country) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.phone = phone;
+        this.birthdate = birthdate;
         this.email = email;
+        this.phone = phone;
+        this.city = city;
+        this.state = state;
+        this.postalCode = postalCode;
+        this.country = country;
     }
 
-    @Override
-    public String toString() {
-        return firstName + " " + lastName + " (" + phone + ", " + email + ")";
-    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Contact contact = (Contact) o;
-        return Objects.equals(firstName, contact.firstName) &&
-                Objects.equals(lastName, contact.lastName) &&
-                Objects.equals(phone, contact.phone) &&
-                Objects.equals(email, contact.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName, lastName, phone, email);
-    }
+    public String getFirstName() { return firstName; }
+    public String getLastName() { return lastName; }
+    public String getBirthdate() { return birthdate; }
+    public String getEmail() { return email; }
+    public String getPhone() { return phone; }
+    public String getCity() { return city; }
+    public String getState() { return state; }
+    public String getPostalCode() { return postalCode; }
+    public String getCountry() { return country; }
 }

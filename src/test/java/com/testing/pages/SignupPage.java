@@ -9,9 +9,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class LoginPage {
+public class SignupPage {
     private WebDriver driver;
     private WebDriverWait wait;
+
+    @FindBy(id = "firstName")
+    private WebElement firstNameField;
+
+    @FindBy(id = "lastName")
+    private WebElement lastNameField;
 
     @FindBy(id = "email")
     private WebElement emailField;
@@ -22,32 +28,18 @@ public class LoginPage {
     @FindBy(id = "submit")
     private WebElement submitButton;
 
-    @FindBy(linkText = "Click here to sign up!")
-    private WebElement signupLink;
-
-    public LoginPage(WebDriver driver) {
+    public SignupPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
     }
 
 
-    public void navigateToHomePage() {
-        driver.get("https://thinking-tester-contact-list.herokuapp.com/");
-    }
-
-    public void clickSignup() {
-        wait.until(ExpectedConditions.elementToBeClickable(signupLink)).click();
-    }
-
-    public void login(String email, String password) {
-        wait.until(ExpectedConditions.visibilityOf(emailField)).sendKeys(email);
+    public void signUp(String firstName, String lastName, String email, String password) {
+        wait.until(ExpectedConditions.visibilityOf(firstNameField)).sendKeys(firstName);
+        lastNameField.sendKeys(lastName);
+        emailField.sendKeys(email);
         passwordField.sendKeys(password);
         submitButton.click();
-    }
-
-    public void registerUser(String firstName, String lastName, String email, String password) {
-
-        System.out.println("Note: registerUser should be in SignupPage class");
     }
 }

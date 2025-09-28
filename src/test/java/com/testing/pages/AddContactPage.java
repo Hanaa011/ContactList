@@ -1,5 +1,6 @@
 package com.testing.pages;
 
+import com.testing.models.Contact;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,11 +20,29 @@ public class AddContactPage {
     @FindBy(id = "lastName")
     private WebElement lastNameField;
 
+    @FindBy(id = "birthdate")
+    private WebElement birthdateField;
+
     @FindBy(id = "email")
     private WebElement emailField;
 
     @FindBy(id = "phone")
     private WebElement phoneField;
+
+    @FindBy(id = "street1")
+    private WebElement street1Field;
+
+    @FindBy(id = "city")
+    private WebElement cityField;
+
+    @FindBy(id = "stateProvince")
+    private WebElement stateField;
+
+    @FindBy(id = "postalCode")
+    private WebElement postalCodeField;
+
+    @FindBy(id = "country")
+    private WebElement countryField;
 
     @FindBy(id = "submit")
     private WebElement submitButton;
@@ -34,13 +53,32 @@ public class AddContactPage {
         PageFactory.initElements(driver, this);
     }
 
-    public void addContact(String firstName, String lastName, String email, String phone) {
+    public void addContact(Contact contact) {
         wait.until(ExpectedConditions.visibilityOf(firstNameField));
 
-        firstNameField.sendKeys(firstName);
-        lastNameField.sendKeys(lastName);
-        emailField.sendKeys(email);
-        phoneField.sendKeys(phone);
+        firstNameField.sendKeys(contact.getFirstName());
+        lastNameField.sendKeys(contact.getLastName());
+        birthdateField.sendKeys(contact.getBirthdate());
+        emailField.sendKeys(contact.getEmail());
+        phoneField.sendKeys(contact.getPhone());
+        street1Field.sendKeys(contact.getStreet1());
+        cityField.sendKeys(contact.getCity());
+        stateField.sendKeys(contact.getState());
+        postalCodeField.sendKeys(contact.getPostalCode());
+        countryField.sendKeys(contact.getCountry());
         submitButton.click();
+    }
+
+    public void waitForRedirect() {
+        wait.until(ExpectedConditions.urlContains("/contactList"));
+    }
+
+    public boolean isOnAddContactPage() {
+        try {
+            return firstNameField.isDisplayed() &&
+                    driver.getCurrentUrl().contains("/addContact");
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

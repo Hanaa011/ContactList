@@ -14,10 +14,17 @@ public class ContactListPage {
     private WebDriver driver;
     private WebDriverWait wait;
 
+
     @FindBy(id = "add-contact")
     private WebElement addContactButton;
 
-    @FindBy(css = "table tr")
+    @FindBy(xpath = "//h1[contains(text(), 'Contact List')]")
+    private WebElement pageTitle;
+
+    @FindBy(className = "contactTable")
+    private WebElement contactTable;
+
+    @FindBy(xpath = "//tr[@class='contactTableBodyRow']")
     private List<WebElement> contactRows;
 
     @FindBy(id = "logout")
@@ -29,24 +36,43 @@ public class ContactListPage {
         PageFactory.initElements(driver, this);
     }
 
-    public void clickAddContact() {
-        addContactButton.click();
+
+    public AddContactPage clickAddContact() {
+        wait.until(ExpectedConditions.elementToBeClickable(addContactButton)).click();
+        return new AddContactPage(driver);
     }
+
 
     public int getContactCount() {
-        return contactRows.size() - 1; // ناقص header row
+        wait.until(ExpectedConditions.visibilityOf(contactTable));
+        return contactRows.size();
     }
 
-    public boolean isContactDisplayed(String contactName) {
+
+    public boolean isContactDisplayed(String firstName, String lastName) {
+        wait.until(ExpectedConditions.visibilityOf(contactTable));
+        String fullName = firstName + " " + lastName;
+
         for (WebElement row : contactRows) {
-            if (row.getText().contains(contactName)) {
+            if (row.getText().contains(fullName)) {
                 return true;
             }
         }
         return false;
     }
 
-    public void waitForPageLoad() {
-        wait.until(ExpectedConditions.visibilityOf(addContactButton));
+
+    public void logout() {
+        wait.until(ExpectedConditions.elementToBeClickable(logoutButton)).click();
+    }
+
+
+    public boolean isOnContactListPage() {
+        try {
+            return pageTitle.isDisplayed() &&
+                    driver.getCurrentUrl().contains("/contactList");
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
