@@ -61,7 +61,6 @@ public class AddContactPage {
         birthdateField.sendKeys(contact.getBirthdate());
         emailField.sendKeys(contact.getEmail());
         phoneField.sendKeys(contact.getPhone());
-        street1Field.sendKeys(contact.getStreet1());
         cityField.sendKeys(contact.getCity());
         stateField.sendKeys(contact.getState());
         postalCodeField.sendKeys(contact.getPostalCode());

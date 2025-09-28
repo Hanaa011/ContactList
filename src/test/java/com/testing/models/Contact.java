@@ -25,7 +25,6 @@ public class Contact {
         this.country = country;
     }
 
-
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
     public String getBirthdate() { return birthdate; }
