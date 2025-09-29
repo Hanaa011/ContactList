@@ -45,14 +45,8 @@ public class taskAddRecords {
     @Test(dataProvider = "usersData")
     public void addUserRecord(String firstName, String age, String department) throws InterruptedException {
 
-
-        driver.findElement(By.id("nameInput"));
         driver.findElement(By.id("nameInput")).sendKeys(firstName);
-
-        driver.findElement(By.id("ageInput"));
         driver.findElement(By.id("ageInput")).sendKeys(age);
-
-
         WebElement countrySelect = driver.findElement(By.id("countrySelect"));
         countrySelect.sendKeys(department);
 
