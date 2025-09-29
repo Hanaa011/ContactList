@@ -33,12 +33,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- WebDriverManager (إصدار واحد فقط) -->
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>${webdrivermanager.version}</version>
-        </dependency>
+
 
         <!-- SLF4J Simple -->
         <dependency>
